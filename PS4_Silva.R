@@ -128,11 +128,10 @@ save(complete_data, file = "complete_data.RData")
 # Attach the dataset.
 attach(complete_data)
 # Define plot's name
-pdf("Trends_on_Popular_Vote_Margin.pdf")
-
+pdf("Trends_on_Vote_and_turnout.pdf")
 # Define plot's parameters and layout
-par(mar=c(4, 3, 4, 1))
-layout(matrix(c(1,1,2,3), 2, 2, byrow = TRUE))
+par(mar=c(4, 4, 3, 4))
+layout(matrix(c(1,1,2,2), 2, 2, byrow = TRUE))
 
 # Tendence of winner % Popular Vote over time 
 plot(x = election_year, y = w_pop_votes_perc,
@@ -151,8 +150,9 @@ axis(side = 1, at = c(1824, 1856, 1888, 1920, 1952, 1984, 2016))
 axis(side = 2, at = c(0, 25, 50, 75, 100))
 # Add a legend
 legend("bottomright",
-       legend = c("Popular Vote", "Electoral College"),
+       legend = c("Popular Vote (Winner)", "Electoral College (Winner)"),
        lty = c(1,3),
+       pch = c(19, 17),
        cex = .8)
 
 # Popular Vote Margin and Turnout over time
@@ -183,15 +183,28 @@ lines(x = election_year, y = turnout,
       col = "red")
 # Add the right axis
 axis(side = 4, at = seq(0, 100, length.out = 5))
+mtext(side = 4, line = 3, 
+      text = "Turnout")
 # Add bottom axis
 axis(side = 1, at = c(1824, 1856, 1888, 1920, 1952, 1984, 2016))
 # Add legend
 legend("bottomright",
-       legend = c("Popular Vote Margin", "Turnout"),
+       legend = c("Popular Vote Margin (Winner)", "Turnout"),
        lty = c(1,1),
        col = c("blue", "red"),
        cex = .7)
+# Close the file
+dev.off()
+# Detach dataset.
+detach(complete_data)
 
+# Explanation about the plots:
+
+
+
+
+# Define a new layout
+layout(matrix(c(1,1,1,1), 2, 2, byrow = TRUE))
 # % Electoral College votes per party
 plot(x = election_year, y = w_votes_elec_col_perc,
      type = "l", axes = FALSE,
@@ -227,11 +240,4 @@ legend("bottomright",
        col = c("blue", "red", "green", "yellow"),
        pch = c(19, 19, 19, 19),
        cex = .6)
-
-# Close the file
-dev.off()
-# Detach dataset.
-detach(complete_data)
-
-# Explanation about the plots:
 
