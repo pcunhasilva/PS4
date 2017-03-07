@@ -138,7 +138,7 @@ plot(x = election_year, y = w_pop_votes_perc,
      type = "p", pch = 19, cex = 0.4,
      ylim = c(0, 100), axes = FALSE,
      xlab = "Election Year",
-     ylab = "% of Votes",
+     ylab = "% of Votes (Margin)",
      main = "Percentage of Popular and \n Electoral College Votes")
 lines(x = election_year, y = w_pop_votes_perc, lty = 1)
 # Tendence of winner % Electoral College Vote 
@@ -184,7 +184,7 @@ lines(x = election_year, y = turnout,
 # Add the right axis
 axis(side = 4, at = seq(0, 100, length.out = 5))
 mtext(side = 4, line = 3, 
-      text = "Turnout")
+      text = "Turnout (%)")
 # Add bottom axis
 axis(side = 1, at = c(1824, 1856, 1888, 1920, 1952, 1984, 2016))
 # Add legend
@@ -199,45 +199,17 @@ dev.off()
 detach(complete_data)
 
 # Explanation about the plots:
+# In the first plot, we observe the evolution of both variables 
+# across different elections. We can note that when the percentage
+# of popular votes increases, the percentage of electoral college 
+# votes seems to increases too. In the second plot, we have the trends 
+# of popular vote margin of the winner (left axis) and turnout (right axis) 
+# over time. We can observe that the largest winner margins are
+# all after 1920. On the other hand, the turnout started to decrease after 
+# 1896 and kept relatively stable for the remaining period. 
+# For the period after 1916, we can observe that the turnout has roughly stable, 
+# but winner's popular vote margin varied. On the other hand, for the period before 1916, 
+# we can say that in the instances that the turnout increased, 
+# the popular vote margin roughly decreased. 
 
-
-
-
-# Define a new layout
-layout(matrix(c(1,1,1,1), 2, 2, byrow = TRUE))
-# % Electoral College votes per party
-plot(x = election_year, y = w_votes_elec_col_perc,
-     type = "l", axes = FALSE,
-     ylim = c(0, 100),
-     xlim = c(1824, 2016),
-     xlab = "Election Year",
-     ylab = "% Electoral College votes",
-     main = "Electoral College votes \n per party over time")
-# Add left axis
-axis(side = 2, at = seq(0, 100, length.out = 5))
-# Add bottom axis
-axis(side = 1, at = c(1824, 1856, 1888, 1920, 1952, 1984, 2016))
-# Add points for Democrats
-points(x = election_year[w_party=="Dem."], 
-       y = w_votes_elec_col_perc[w_party=="Dem."],
-       pch = 19, cex = 0.5, col = "blue")
-# Add Republicans
-points(x = election_year[w_party=="Rep."], 
-       y = w_votes_elec_col_perc[w_party=="Rep."],
-       pch = 19, cex = 0.5, col = "red")
-# Democratic-Republican
-points(x = election_year[w_party=="D.-R."], 
-       y = w_votes_elec_col_perc[w_party=="D.-R."],
-       pch = 19, cex = 0.5, col = "green")
-# Whig
-points(x = election_year[w_party=="Whig"], 
-       y = w_votes_elec_col_perc[w_party=="Whig"],
-       pch = 19, cex = 0.2, col = "yellow")
-# Add legend
-legend("bottomright",
-       legend = c("Democracts", "Republican", 
-                  "Democratic-Republican", "Whig"),
-       col = c("blue", "red", "green", "yellow"),
-       pch = c(19, 19, 19, 19),
-       cex = .6)
 
